@@ -1,0 +1,1 @@
+sudo docker run -p 7860:7860 -v /srv/models:/app/models -v ./characters:/app/characters -v ./presets:/app/presets marlinmr/text-generation-webui python3 server.py --cpu --cai-chat --verbose --listen --locad-character chatgpt --extensions send_pictures--model llama-7b-hf

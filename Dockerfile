@@ -11,7 +11,7 @@ RUN git clone https://github.com/qwopqwop200/GPTQ-for-LLaMa /build
 WORKDIR /build
 
 ARG GPTQ_SHA
-RUN git reset --hard ${GPTQ_SHA}
+RUN git reset --hard 841feedde876785bc8022ca48fd9c3ff626587e2
 
 RUN --mount=type=cache,target=/root/.cache/pip pip3 install -r requirements.txt
 
@@ -31,7 +31,7 @@ RUN apt-get update && \
 
 RUN --mount=type=cache,target=/root/.cache/pip pip3 install torch torchvision torchaudio
 
-RUN git clone https://github.com/oobabooga/text-generation-webui /app
+RUN git clone https://github.com/marlinmr/text-generation-webui /app
 
 WORKDIR /app
 
@@ -46,5 +46,3 @@ RUN --mount=type=cache,target=/root/.cache/pip pip3 install /app/repositories/GP
 ENV CLI_ARGS=""
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
-
-CMD python3 server.py ${CLI_ARGS}
