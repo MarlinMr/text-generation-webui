@@ -1,0 +1,1 @@
+sudo docker run -it -p 7860:7860 -p 5000:5000 -v ./characters:/app/characters -v ./extensions:/app/extensions -v ./models:/app/models -v ./presets:/app/presets -v ./prompts:/app/prompts -v ./softprompts:/app/softprompts -v ./training:/app/training -v ./loras:/app/loras text-generation-webui-text-generation-webui /bin/bash

@@ -24,7 +24,7 @@ def random_hash():
 
 
 async def run(context):
-    server = "127.0.0.1"
+    server = "localhost"
     params = {
         'max_new_tokens': 200,
         'do_sample': True,
@@ -48,7 +48,6 @@ async def run(context):
     }
     payload = json.dumps([context, params])
     session = random_hash()
-
     async with websockets.connect(f"ws://{server}:7860/queue/join") as websocket:
         while content := json.loads(await websocket.recv()):
             # Python3.10 syntax, replace with if elif on older
@@ -77,15 +76,16 @@ async def run(context):
                     if (content["msg"] == "process_completed"):
                         break
 
-prompt = "What I would like to say is the following: "
+#prompt = "What I would like to say is the following: "
+while True:
+    prompt = input("Prompt: ")
 
+    async def get_result():
+        async for response in run(prompt):
+            # Print intermediate steps
+            print(response)
 
-async def get_result():
-    async for response in run(prompt):
-        # Print intermediate steps
+        # Print final result
         print(response)
 
-    # Print final result
-    print(response)
-
-asyncio.run(get_result())
+    asyncio.run(get_result())
